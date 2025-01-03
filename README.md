@@ -23,7 +23,7 @@ The corresponding coefficients are saved in the files:
 - `785_800_2.0pi_ordre1.fits`, `785_800_2.0pi_ordre2.fits`
 
 ### Black Box
-This code `boite_noire_final.py`
+This code `boite_noire_final.py` determines the voltage to be applied to the SLM after it has been given a phase table. This conversion of voltage from phase is based on the coefficients found by the MCMC method.
 
 
 
