@@ -18,9 +18,9 @@ We modeled the data using the MCMC method, at order 1 and order 2 using the code
 - `mcmc_pascontactoptique_ordre2.py`
 
 The corresponding coefficients are saved in the files:
-- `633_800_2.0pi_ordre1.fits`, `633_800_2.0pi_ordre2.fits`
-- `705_800_2.0pi_ordre1.fits`, `705_800_2.0pi_ordre2.fits`
-- `785_800_2.0pi_ordre1.fits`, `785_800_2.0pi_ordre2.fits`
+- `633_800_2pi_ordre1.fits`, `633_800_2pi_ordre2.fits`
+- `705_800_2pi_ordre1.fits`, `705_800_2pi_ordre2.fits`
+- `785_800_2pi_ordre1.fits`, `785_800_2pi_ordre2.fits`
 
 ### Black Box
 This code `boite_noire_final.py` determines the voltage to be applied to the SLM after it has been given a phase table. This conversion of voltage from phase is based on the coefficients found by the MCMC method.
