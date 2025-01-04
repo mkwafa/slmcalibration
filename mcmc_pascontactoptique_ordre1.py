@@ -9,9 +9,9 @@ plt.rcParams['figure.figsize'] = (20, 10)
 plt.rcParams['font.size'] = 16
 
 # DATA:
-#output_fits_1 = "data633_800.fits"
-#output_fits_1 = "data705_800.fits"
-output_fits_1 = "data785_800.fits"
+#output_fits_1 = "./data/data633_800.fits"
+#output_fits_1 = "./data/data705_800.fits"
+output_fits_1 = "./data/data785_800.fits"
 
 # Charger le fichier FITS
 with fits.open(output_fits_1) as hdul:
@@ -160,7 +160,7 @@ plt.ylabel(r'Différence intensité $\Delta I$')
 plt.title("'Pas contact optique'")
 plt.grid()
 plt.legend(loc='upper right')
-plt.savefig('C:/Users/Luce Razakarivony/OneDrive/Université/M2 OSAE/Projet SLM/Plot MCMC ordre 1/785_ordre1.png')
+plt.savefig('./data/785_ordre1.png')
 plt.show()
 print('Theta max: ',theta_max)
 
@@ -211,7 +211,7 @@ hdu.header['FICHIER'] = "785nm 800nm 2.0"
 hdu.header['COMMENT'] = "Coefficients et leurs erreurs pour les parametres"
 
 # Sauvegarder dans un fichier FITS
-output_fits ='C:/Users/Luce Razakarivony/OneDrive/Université/M2 OSAE/Projet SLM/Plot MCMC ordre 1/785_800_2pi_ordre1.fits'
+output_fits ='./coeff_ordre1/785_800_2pi_ordre1.fits'
 hdu.writeto(output_fits, overwrite=True)
 
 print(f"Les coefficients et leurs erreurs ont été écrits dans le fichier FITS : {output_fits}")
@@ -220,5 +220,5 @@ print(f"Les coefficients et leurs erreurs ont été écrits dans le fichier FITS
 #corner : paramètres avec quantiles
 labels = ['A',r'$\phi_1$',r'$\alpha$',r'$\beta$',r'$\gamma$']
 fig = corner.corner(samples,show_titles=True,labels=labels,plot_datapoints=True,quantiles=[0.16, 0.5, 0.84])
-plt.savefig('C:/Users/Luce Razakarivony/OneDrive/Université/M2 OSAE/Projet SLM/Plot MCMC ordre 1/785_ordre1_corner.png')
+plt.savefig('./data/785_ordre1_corner.png')
 plt.show()
