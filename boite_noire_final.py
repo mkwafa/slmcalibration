@@ -49,9 +49,9 @@ def carte_de_voltage(carte_phase, longueur_d_onde):
     #on ne choisit qu'un seul étalonnage pour toutes les longueurs d'onde : 800nm 2pi
     #ouverture et lecture du fichier d'étalonnage correspondant au longueur_d_onde
     #changer l'adresse si les fichiers on changé de dossier
-    fichier_633 = ".coeff_ordre2/633_800_2.0pi_ordre2.fits"
-    fichier_705 = ".coeff_ordre2/705_800_2.0pi_ordre2.fits"
-    fichier_785 = ".coeff_ordre2/785_800_2.0pi_ordre2.fits"
+    fichier_633 = "./coeff_ordre2/633_800_2.0pi_ordre2.fits"
+    fichier_705 = "./coeff_ordre2/705_800_2.0pi_ordre2.fits"
+    fichier_785 = "./coeff_ordre2/785_800_2.0pi_ordre2.fits"
     
 
     #ouverture de chaque fichier d'étalonnage 
