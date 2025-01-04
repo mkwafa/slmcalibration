@@ -11,34 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from astropy.io import fits
 
-
-## Allumage et acquisition d'images
-slm = slmdisplaysdk.SLMInstance()
-
-## Check if the library implements the required version
-if not slm.requiresVersion(5):
-    exit(1)
-
-#ouvre le SLM et renvoie une erreur si la connexion a échouée
-error = slm.open()
-assert error == slmdisplaysdk.ErrorCode.NoError, slm.errorString(error)
-
-#connexion à la camera (si besoin)
-print('start')
-testbed = TestbedProxy('127.0.0.1', 8768)               # Establish connection to the testbed server.
-
-cam = testbed.corono_camera                           # Start up / connect to the camera.
-cam.exposure_time = 109974.681  #pour 633nm
-
-#on prend une photo avant d'appliquer un voltage:
-data_photo=np.zeros((1200,1920),dtype=float)
-error = slm.showData(data_photo)
-time.sleep(0.1)
-array = list(cam.take_raw_exposures(num_exposures=1))[0]
-fits.writeto('D:\\slm_osae_2024\\resultats\\test_boite_noire\\image_sansvoltage.fits',array,overwrite=True)
-
-print('end image')
-
+#BOITE NOIRE
 
 #(s'assurer que le déterminant est positif (valeur sous la racine carrée))
 def voltage(phase, alpha, beta, gamma):
@@ -49,8 +22,6 @@ def voltage_deg1(phase, alpha, beta):
     '''voltage à l'ordre 1'''
     return (phase - alpha) / beta
 
-
-#BOITE NOIRE
 
 #on crée un exemple de carte de phase : tableau numpy flottant
 tableau_phase =np.zeros((1200,1920)).astype('float64')
@@ -75,9 +46,9 @@ def carte_de_voltage(carte_phase, longueur_d_onde):
     #on ne choisit qu'un seul étalonnage pour toutes les longueurs d'onde : 800nm 2pi
     #ouverture et lecture du fichier d'étalonnage correspondant au longueur_d_onde
     #changer l'adresse si les fichiers on changé de dossier
-    fichier_633 = "D:/slm_osae_2024/resultats/nouveau test 633/633_800_2.0pi_ordre1.fits"
-    fichier_705 = "D:/slm_osae_2024/resultats/nouveau test 705/705_800_2.0pi_ordre1.fits"
-    fichier_785 = "D:/slm_osae_2024/resultats/nouveau test 785/785_800_2.0pi_ordre1.fits"
+    fichier_633 = "./633_800_2.0pi_ordre2.fits"
+    fichier_705 = "./705_800_2.0pi_ordre2.fits"
+    fichier_785 = "./785_800_2.0pi_ordre2.fits"
     
 
     #ouverture de chaque fichier d'étalonnage 
@@ -89,22 +60,22 @@ def carte_de_voltage(carte_phase, longueur_d_onde):
         data_785 = hdul[1].data
 
     # extraction des coefficients alpha, beta et gamma
-    alpha_633, beta_633 = data_633[2][1], data_633[3][1]
-    alpha_705, beta_705 = data_705[2][1], data_705[3][1]
-    alpha_785, beta_785 = data_785[2][1], data_785[3][1]
+    alpha_633, beta_633, gamma_633 = data_633[2][1], data_633[3][1], data_633[4][1]
+    alpha_705, beta_705, gamma_705 = data_705[2][1], data_705[3][1], data_705[4][1]
+    alpha_785, beta_785, gamma_785 = data_785[2][1], data_785[3][1], data_785[4][1]
     
     #conversion phase --> voltage 
     #ici à l'ordre 1
     if 633 <= longueur_d_onde < 705:
-        V = (705 - longueur_d_onde) / (705 - 633) * voltage_deg1(tableau_phase + alpha_633, alpha_633, beta_633) + (
+        V = (705 - longueur_d_onde) / (705 - 633) * voltage(tableau_phase + alpha_633, alpha_633, beta_633, gamma_633) + (
                     longueur_d_onde - 633) / (705 - 633) * voltage_deg1(tableau_phase + alpha_705, alpha_705, beta_705)
 
     if 705 <= longueur_d_onde < 785:
-        V = (785 - longueur_d_onde) / (785 - 705) * voltage_deg1(tableau_phase + alpha_705, alpha_705, beta_705) + (
-                    longueur_d_onde - 705) / (785 - 705) * voltage_deg1(tableau_phase + alpha_785, alpha_785, beta_785)
+        V = (785 - longueur_d_onde) / (785 - 705) * voltage(tableau_phase + alpha_705, alpha_705, beta_705, gamma_705) + (
+                    longueur_d_onde - 705) / (785 - 705) * voltage(tableau_phase + alpha_785, alpha_785, beta_785, gamma_785)
 
     if longueur_d_onde >= 785:
-        V = voltage_deg1(tableau_phase + alpha_785, alpha_785, beta_785)
+        V = voltage(tableau_phase + alpha_785, alpha_785, beta_785, gammma_785)
 
     
     # Création de deux plots côte à côte : carte de phase et carte de voltage
@@ -133,12 +104,6 @@ def carte_de_voltage(carte_phase, longueur_d_onde):
     
     return V.astype('float64')
 
-
 #appliquer la carte de voltage au SLM
 error = slm.showData(carte_de_voltage((tableau_phase, 633)))
 assert error == slmdisplaysdk.ErrorCode.NoError, slm.errorString(error)
-
-#on prend une photo après voltage :
-time.sleep(0.1)
-array_voltage = list(cam.take_raw_exposures(num_exposures=1))[0]
-fits.writeto('D:\\slm_osae_2024\\resultats\\test_boite_noire\\Image_avecvoltage.fits', array_voltage, overwrite=True)
