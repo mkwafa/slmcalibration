@@ -1,17 +1,17 @@
-from catkit2 import TestbedProxy
+#from catkit2 import TestbedProxy
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
 import time
 import os
 import thd
-sys.path.append('C:\\Program Files\\HOLOEYE Photonics\\SLM Display SDK (Python) v3.2.2\\python')
-from holoeye import slmdisplaysdk
+#sys.path.append('C:\\Program Files\\HOLOEYE Photonics\\SLM Display SDK (Python) v3.2.2\\python')
+#from holoeye import slmdisplaysdk
 import numpy as np
 import matplotlib.pyplot as plt
 from astropy.io import fits
 
-                                                        ''' Before Starting'''
+''' Before Starting'''
 ''' On ERIS CONFIGURATION MANAGER you need to load the configuration file : ERISCalibration_NIR-153_800.00nm_2.00pi_sgl=1540.hecalib.txt'''
 
 #BOITE NOIRE
@@ -78,7 +78,7 @@ def carte_de_voltage(carte_phase, longueur_d_onde):
                     longueur_d_onde - 705) / (785 - 705) * voltage(tableau_phase + alpha_785, alpha_785, beta_785, gamma_785)
 
     if longueur_d_onde >= 785:
-        V = voltage(tableau_phase + alpha_785, alpha_785, beta_785, gammma_785)
+        V = voltage(tableau_phase + alpha_785, alpha_785, beta_785, gamma_785)
 
     
     # Création de deux plots côte à côte : carte de phase et carte de voltage
@@ -108,5 +108,5 @@ def carte_de_voltage(carte_phase, longueur_d_onde):
     return V.astype('float64')
 
 #appliquer la carte de voltage au SLM
-error = slm.showData(carte_de_voltage((tableau_phase, 633)))
-assert error == slmdisplaysdk.ErrorCode.NoError, slm.errorString(error)
+#error = slm.showData(carte_de_voltage((tableau_phase, 633)))
+#assert error == slmdisplaysdk.ErrorCode.NoError, slm.errorString(error)
