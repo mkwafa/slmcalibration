@@ -9,7 +9,7 @@ The data used to carry out this project are stored in the folder `data`, they ar
 - `data_705.fits`
 - `data_785.fits`
 
-These files contain a series of 300 images captured 9 times for each corresponding laser. We measure the difference in intensity between a part of the image where voltage is applied and a part of the image where voltage is not applied. The intensity difference values and their associated uncertainties are grouped together in these data files.
+These files contain a series of 300 images captured 9 times for each corresponding laser. We measure the difference in intensity between a part of the image where voltage is applied and a part of the image where voltage is not applied. The intensity difference values and their associated uncertainties are grouped together in these data files. The first line si the voltage rate, the second lline the uncertainty of the intensity difference measurement and the last line is the intensity difference.
 
 ### Fit with MCMC
 
