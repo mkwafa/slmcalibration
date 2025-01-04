@@ -4,7 +4,7 @@ The aim of this project is to calibrate an SLM so as to apply the voltage requir
 
 ### Data
 
-The data used to carry out this project are stored in the folder data, they are the files :
+The data used to carry out this project are stored in the folder `data`, they are the files :
 - `data_633.fits`
 - `data_705.fits`
 - `data_785.fits`
@@ -17,7 +17,7 @@ We modeled the data using the MCMC method, at order 1 and order 2 using the code
 - `mcmc_pascontactoptique_ordre1.py`
 - `mcmc_pascontactoptique_ordre2.py`
 
-The corresponding coefficients are saved in the folder coeff_ordre1 and coeff_ordre2, they are the files :
+The corresponding coefficients are saved in the folder `coeff_ordre1` and `coeff_ordre2`, they are the files :
 - `633_800_2pi_ordre1.fits`, `633_800_2pi_ordre2.fits`
 - `705_800_2pi_ordre1.fits`, `705_800_2pi_ordre2.fits`
 - `785_800_2pi_ordre1.fits`, `785_800_2pi_ordre2.fits`
