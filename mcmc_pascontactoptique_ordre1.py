@@ -211,7 +211,7 @@ hdu.header['FICHIER'] = "785nm 800nm 2.0"
 hdu.header['COMMENT'] = "Coefficients et leurs erreurs pour les parametres"
 
 # Sauvegarder dans un fichier FITS
-output_fits ='./coeff_ordre1/785_800_2pi_ordre1.fits'
+output_fits ='./coeff_ordre1/785_800_2pi_ordre1_new.fits'
 hdu.writeto(output_fits, overwrite=True)
 
 print(f"Les coefficients et leurs erreurs ont été écrits dans le fichier FITS : {output_fits}")
