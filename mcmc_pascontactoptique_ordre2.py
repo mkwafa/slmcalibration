@@ -9,7 +9,9 @@ plt.rcParams['figure.figsize'] = (20, 10)
 plt.rcParams['font.size'] = 16
 
 # DATA:
-output_fits_1 = "data785_800.fits"
+#output_fits_1 = "./data/data633_800.fits"
+#output_fits_1 = "./data/data705_800.fits"
+output_fits_1 = "./data/data785_800.fits"
 
 # Charger le fichier FITS
 with fits.open(output_fits_1) as hdul:
@@ -207,7 +209,7 @@ hdu.header['FICHIER'] = "785nm 800nm 2.0"
 hdu.header['COMMENT'] = "Coefficients et leurs erreurs pour les parametres"
 
 # Sauvegarder dans un fichier FITS
-output_fits ='./coeff_ordre2/785_800_2pi_ordre2.fits'
+output_fits ='./coeff_ordre2/785_800_2pi_ordre2_new.fits'
 hdu.writeto(output_fits, overwrite=True)
 
 print(f"Les coefficients et leurs erreurs ont été écrits dans le fichier FITS : {output_fits}")
