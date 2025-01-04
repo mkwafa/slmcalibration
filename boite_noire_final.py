@@ -1,15 +1,32 @@
-#from catkit2 import TestbedProxy
+from catkit2 import TestbedProxy
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
 import time
 import os
 import thd
-#sys.path.append('C:\\Program Files\\HOLOEYE Photonics\\SLM Display SDK (Python) v3.2.2\\python')
-#from holoeye import slmdisplaysdk
+sys.path.append('C:\\Program Files\\HOLOEYE Photonics\\SLM Display SDK (Python) v3.2.2\\python')
+from holoeye import slmdisplaysdk
 import numpy as np
 import matplotlib.pyplot as plt
 from astropy.io import fits
+
+## Allumage et acquisition d'images
+slm = slmdisplaysdk.SLMInstance()
+
+## Check if the library implements the required version
+if not slm.requiresVersion(5):
+    exit(1)
+
+#ouvre le SLM et renvoie une erreur si la connexion a échouée
+error = slm.open()
+assert error == slmdisplaysdk.ErrorCode.NoError, slm.errorString(error)
+
+#connexion à la camera (si besoin)
+testbed = TestbedProxy('127.0.0.1', 8768)               # Establish connection to the testbed server.
+
+cam = testbed.corono_camera                           # Start up / connect to the camera.
+cam.exposure_time = 109974.681  #pour 633nm
 
 ''' Before Starting'''
 ''' On ERIS CONFIGURATION MANAGER you need to load the configuration file : ERISCalibration_NIR-153_800.00nm_2.00pi_sgl=1540.hecalib.txt'''
@@ -49,9 +66,9 @@ def carte_de_voltage(carte_phase, longueur_d_onde):
     #on ne choisit qu'un seul étalonnage pour toutes les longueurs d'onde : 800nm 2pi
     #ouverture et lecture du fichier d'étalonnage correspondant au longueur_d_onde
     #changer l'adresse si les fichiers on changé de dossier
-    fichier_633 = "./coeff_ordre2/633_800_2.0pi_ordre2.fits"
-    fichier_705 = "./coeff_ordre2/705_800_2.0pi_ordre2.fits"
-    fichier_785 = "./coeff_ordre2/785_800_2.0pi_ordre2.fits"
+    fichier_633 = "./coeff_ordre2/633_800_2pi_ordre2.fits"
+    fichier_705 = "./coeff_ordre2/705_800_2pi_ordre2.fits"
+    fichier_785 = "./coeff_ordre2/785_800_2pi_ordre2.fits"
     
 
     #ouverture de chaque fichier d'étalonnage 
@@ -107,6 +124,11 @@ def carte_de_voltage(carte_phase, longueur_d_onde):
     
     return V.astype('float64')
 
+
+#test boite noire sans appliquer au SLM
+carte_de_voltage(tableau_phase, 705)
+
+
 #appliquer la carte de voltage au SLM
-#error = slm.showData(carte_de_voltage((tableau_phase, 633)))
-#assert error == slmdisplaysdk.ErrorCode.NoError, slm.errorString(error)
+error = slm.showData(carte_de_voltage((tableau_phase, 633)))
+assert error == slmdisplaysdk.ErrorCode.NoError, slm.errorString(error)
