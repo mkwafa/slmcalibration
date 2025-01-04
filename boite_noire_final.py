@@ -11,6 +11,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from astropy.io import fits
 
+                                                        ''' Before Starting'''
+''' On ERIS CONFIGURATION MANAGER you need to load the configuration file : ERISCalibration_NIR-153_800.00nm_2.00pi_sgl=1540.hecalib.txt'''
+
 #BOITE NOIRE
 
 #(s'assurer que le déterminant est positif (valeur sous la racine carrée))
@@ -46,9 +49,9 @@ def carte_de_voltage(carte_phase, longueur_d_onde):
     #on ne choisit qu'un seul étalonnage pour toutes les longueurs d'onde : 800nm 2pi
     #ouverture et lecture du fichier d'étalonnage correspondant au longueur_d_onde
     #changer l'adresse si les fichiers on changé de dossier
-    fichier_633 = "./633_800_2.0pi_ordre2.fits"
-    fichier_705 = "./705_800_2.0pi_ordre2.fits"
-    fichier_785 = "./785_800_2.0pi_ordre2.fits"
+    fichier_633 = ".coeff_ordre2/633_800_2.0pi_ordre2.fits"
+    fichier_705 = ".coeff_ordre2/705_800_2.0pi_ordre2.fits"
+    fichier_785 = ".coeff_ordre2/785_800_2.0pi_ordre2.fits"
     
 
     #ouverture de chaque fichier d'étalonnage 
