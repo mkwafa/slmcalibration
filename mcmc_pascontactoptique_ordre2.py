@@ -158,7 +158,7 @@ plt.ylabel(r'Différence intensité $\Delta I$')
 plt.title("'Pas contact optique'")
 plt.grid()
 plt.legend(loc='upper left')
-plt.savefig('C:/Users/Luce Razakarivony/OneDrive/Université/M2 OSAE/Projet SLM/Plot MCMC ordre 2/785_ordre2.png')
+plt.savefig('./data/785_ordre2.png')
 plt.show()
 print('Theta max: ',theta_max)
 
@@ -207,7 +207,7 @@ hdu.header['FICHIER'] = "785nm 800nm 2.0"
 hdu.header['COMMENT'] = "Coefficients et leurs erreurs pour les parametres"
 
 # Sauvegarder dans un fichier FITS
-output_fits ='C:/Users/Luce Razakarivony/OneDrive/Université/M2 OSAE/Projet SLM/Plot MCMC ordre 2/785_800_2pi_ordre2.fits'
+output_fits ='./coeff_ordre2/785_800_2pi_ordre2.fits'
 hdu.writeto(output_fits, overwrite=True)
 
 print(f"Les coefficients et leurs erreurs ont été écrits dans le fichier FITS : {output_fits}")
@@ -215,5 +215,5 @@ print(f"Les coefficients et leurs erreurs ont été écrits dans le fichier FITS
 #corner : paramètres avec quantiles
 labels = ['A',r'$\phi_1$',r'$\alpha$',r'$\beta$',r'$\gamma$']
 fig = corner.corner(samples,show_titles=True,labels=labels,plot_datapoints=True,quantiles=[0.16, 0.5, 0.84])
-plt.savefig('C:/Users/Luce Razakarivony/OneDrive/Université/M2 OSAE/Projet SLM/Plot MCMC ordre 2/785_ordre2_corner.png')
+plt.savefig('./data/785_ordre2_corner.png')
 plt.show()
