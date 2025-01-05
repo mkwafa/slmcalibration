@@ -34,8 +34,8 @@ To produce the requested phase on the SLM, use the `applique_une_phase_au_slm` f
 This function takes a phase map and a laser wavelength, generates an appropriate voltage map, and sends this map to the SLM.
 
 **Parameters:**
-- `phase_map` (`numpy.ndarray`): The phase map to be applied to the SLM.
-- `wavelength_length` (`int`): The laser wavelength in nanometers.
+- `carte_phase` (`numpy.ndarray`): The phase map to be applied to the SLM.
+- `longueur_d_onde` (`int`): The laser wavelength in nanometers.
 
 **Returns:**
 - `None`: The function does not return any value but sends the voltage map to the SLM for the phase modulation.
