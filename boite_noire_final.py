@@ -78,7 +78,7 @@ def applique_une_phase_au_slm(carte_phase, longueur_d_onde):
     # Calcul du voltage basé sur la longueur d'onde
     if 633 <= longueur_d_onde < 705:
         V = (705 - longueur_d_onde) / (705 - 633) * voltage(carte_phase + alpha_633, alpha_633, beta_633, gamma_633) + \
-            (longueur_d_onde - 633) / (705 - 633) * voltage_deg1(carte_phase + alpha_705, alpha_705, beta_705)
+            (longueur_d_onde - 633) / (705 - 633) * voltage(carte_phase + alpha_705, alpha_705, beta_705)
     elif 705 <= longueur_d_onde < 785:
         V = (785 - longueur_d_onde) / (785 - 705) * voltage(carte_phase + alpha_705, alpha_705, beta_705, gamma_705) + \
             (longueur_d_onde - 705) / (785 - 705) * voltage(carte_phase + alpha_785, alpha_785, beta_785, gamma_785)
