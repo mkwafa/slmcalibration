@@ -24,23 +24,23 @@ The corresponding coefficients are saved in the folder `coeff_ordre1` and `coeff
 - `785_800_2pi_ordre1.fits`, `785_800_2pi_ordre2.fits`
 
 ### Black Box
-The code `boite_noire_final.py` determines the voltage to be applied to the SLM after it has been given a phase table. This conversion of voltage from phase is based on the coefficients found by the MCMC method. We recommend to use the files *_ordre2 for the coefficients because they are more precise.
-For the SLM to produce the requested phase, call the  `applique_une_phase_au_slm` function code in the `boite_noire_final.py` code.
-    "
-    This function `applique_une_phase_au_slm` takes a phase map and the laser wavelength,
-    generates an appropriate voltage map, and sends this map to the SLM.
 
-    Parameters
-    ----------
-    phase_map: numpy.ndarray
-        Phase map to be applied to the SLM.
-    wavelength_length : int
-        Laser wavelength in nanometers.
+The code `boite_noire_final.py` is responsible for determining the voltage to be applied to the SLM based on a provided phase table. This conversion process utilizes coefficients determined through the MCMC method. For improved precision, it is recommended to use the coefficient files ending in `*_ordre2`.
 
-    Returns
-    -------
-    None
-    "
+To produce the requested phase on the SLM, use the `applique_une_phase_au_slm` function contained within `boite_noire_final.py`.
+
+#### Function `applique_une_phase_au_slm`
+
+This function takes a phase map and a laser wavelength, generates an appropriate voltage map, and sends this map to the SLM.
+
+**Parameters:**
+- `phase_map` (`numpy.ndarray`): The phase map to be applied to the SLM.
+- `wavelength_length` (`int`): The laser wavelength in nanometers.
+
+**Returns:**
+- `None`: The function does not return any value but sends the voltage map to the SLM for the phase modulation.
+
+
 
 
 
