@@ -26,7 +26,7 @@ The corresponding coefficients are saved in the folder `coeff_ordre1` and `coeff
 ### Black Box
 The code `boite_noire_final.py` determines the voltage to be applied to the SLM after it has been given a phase table. This conversion of voltage from phase is based on the coefficients found by the MCMC method. We recommend to use the files *_ordre2 for the coefficients because they are more precise.
 For the SLM to produce the requested phase, call the  `applique_une_phase_au_slm` function code in the `boite_noire_final.py` code.
-    “"”
+    "
     This function `applique_une_phase_au_slm` takes a phase map and the laser wavelength,
     generates an appropriate voltage map, and sends this map to the SLM.
 
@@ -40,7 +40,7 @@ For the SLM to produce the requested phase, call the  `applique_une_phase_au_slm
     Returns
     -------
     None
-    “"”
+    "
 
 
 
